@@ -4,6 +4,7 @@ const {mongodb,foodSchema,catSchema} = require('./db');
 const createuser = require('./Routes/createUser');
 const loginuser = require('./Routes/loginUser');
 const orderdata = require('./Routes/order_data');
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 var cors = require('cors')
 const app = express();
 
@@ -25,7 +26,11 @@ app.use('/user',createuser);
 app.use('/user',loginuser);
 app.use('/api',orderdata);
 
+// Error Handling Router
+app.use(notFound);
+app.use(errorHandler);
 
+// Base 
 app.get('/', async (req,res)=>{
     try{
         food = await foodData.find({});
