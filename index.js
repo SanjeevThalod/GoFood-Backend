@@ -10,8 +10,7 @@ const app = express();
 // Allowing inter port communication
 app.use(cors());
 
-// Connecting to MongoDB
-mongodb();
+
 // Initiliazing food DB model
 const foodData = mongoose.model('foodData',foodSchema,'foodItems');
 const catData = mongoose.model('catData',catSchema,'foodcatagory');
@@ -44,6 +43,12 @@ app.post('/food',async (req,res)=>{
     } catch (error) {
         res.status(400).json(error.message);
     }
+})
+
+mongodb().then(() => {
+    app.listen(5001, () => {
+        console.log("listening for requests");
+    })
 })
 
 app.listen(5000,console.log('Listening on 5000'));
