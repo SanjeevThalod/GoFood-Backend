@@ -4,7 +4,7 @@ const {mongodb,foodSchema,catSchema} = require('./db');
 const createuser = require('./Routes/createUser');
 const loginuser = require('./Routes/loginUser');
 const orderdata = require('./Routes/order_data');
-const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const { notFound, errorHandler } = require("./errormiddleware");
 var cors = require('cors')
 const app = express();
 
