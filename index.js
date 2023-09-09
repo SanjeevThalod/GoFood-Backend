@@ -21,7 +21,7 @@ let food,category;
 app.use(express.json());
 app.use('/user',createuser);
 app.use('/user',loginuser);
-app.use('/user',orderdata);
+app.use('/api',orderdata);
 
 
 app.get('/', async (req,res)=>{

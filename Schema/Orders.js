@@ -1,6 +1,4 @@
-const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
 
 const OrderSchema = new mongoose.Schema({
     email:{
@@ -14,4 +12,6 @@ const OrderSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Order',OrderSchema);
+const Order = mongoose.model('Order',OrderSchema);
+
+module.exports = Order;

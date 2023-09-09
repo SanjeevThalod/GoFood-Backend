@@ -1,15 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const userSchema = require('../User');
+const User = require('../Schema/User');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const {body,validationResult} = require('express-validator');
+const genToken = require('../authenticate/jwt')
+const {body} = require('express-validator');
 
 const router = express.Router();
-
-// Creating Model
-const User = mongoose.model('User',userSchema);
-const jwtToken = "arondom32bitstringauthentication"
 
 // Login Request
 router.post('/login',[body('email','Enter Valid email').isEmail(),body('password').isLength({min:5})],async (req,res)=>{
@@ -30,7 +25,7 @@ router.post('/login',[body('email','Enter Valid email').isEmail(),body('password
                     }
                 }
                 let username = userData.name;
-                const authToken = jwt.sign(data,jwtToken);
+                const authToken = genToken(data);
                 res.status(200).json({success:true,authToken:authToken,username:username});
             }
         }
